@@ -1,0 +1,87 @@
+{
+  "state": "SEALED_FOR_ONE_RUN",
+  "repository": "leninworld/pymc",
+  "ref": "refs/heads/validate-data-dtype-8467-merge-20261106",
+  "image": "ghcr.io/astral-sh/uv@sha256:8d1825eb3e41b0142309f4a1c5c7781f072d8c8c9964ea073f34788a030bbeba",
+  "actual_python": "3.12.13",
+  "actual_uv": "0.11.8",
+  "source": {
+    "upstream": "976ef22c5ecc89540880375d27fb879a9bfc19e1",
+    "head": "170b905e02b86915d1f464b61e84f872ff70aedb",
+    "candidate_tree": "ecc01e037f5aaad58df1407edeab5aad2e2cb792",
+    "archives": {
+      "baseline": {
+        "ref": "976ef22c5ecc89540880375d27fb879a9bfc19e1",
+        "archive_sha256": "a2a8e915dde9d1c81dde779e3ae8b95d05dc6e7c51479779244a61f3beb2e7fd",
+        "compressed": 6801905,
+        "expanded": 19025920,
+        "members": 481,
+        "links": []
+      },
+      "candidate": {
+        "ref": "ecc01e037f5aaad58df1407edeab5aad2e2cb792",
+        "archive_sha256": "81ef86a8fad06c993a0cc856d593c60b7ea09cefd4fee01f4910792d3a7279f8",
+        "compressed": 6802784,
+        "expanded": 19036160,
+        "members": 481,
+        "links": []
+      }
+    },
+    "source_runtime_executed": false
+  },
+  "source_fingerprints": {
+    "baseline": {
+      "pymc/data.py": "54f0b16d893532de2596f6ade1510c2904c1c3330ce2f83eb08e5d4301b8b56e",
+      "pymc/model/core.py": "22efee11d27bb822055029b097b344c65bc6416e07791ca32f6a4dec77ddb56a",
+      "pymc/pytensorf.py": "ecb80be6c958e155541be93db707ca9d63c97815915cf87ffd0a2eba74a3f1cc",
+      "tests/test_data.py": "f8f894f584f92cffc50e8665e81f992522156a0e5ec78e0c27b09e5592a28356",
+      "tests/test_pytensorf.py": "b13fba092eac221d6564df2fb8b50ff8db119b744e51c96a0d673847a765b6f2"
+    },
+    "candidate": {
+      "pymc/data.py": "14ddc1266ac95229417d343664f0aa3ce5b34b2bd820078b5d8615b813549f0c",
+      "pymc/model/core.py": "67dd8e4844c1a75f341234e77a4427107a4eaf514e8fd7513e3f07e3590e6530",
+      "pymc/pytensorf.py": "1f996263df0b98e32d42ca192780c30e5ceaed6a9074755668f7f9108a0aad0a",
+      "tests/test_data.py": "bc870bd4d7ab5aa5c53196eb65b5d44e88ee47d81f15e5a85f8966e9003c537d",
+      "tests/test_pytensorf.py": "ce9335d556c4a88ab5f91e330453a1feb499523257a5b9e61d436299a2fd6760"
+    }
+  },
+  "whole_deadline_seconds": 3000,
+  "attempt": 1,
+  "resource_estimate": {
+    "selected_dependency_wheel_upper_bytes": 232709730,
+    "image_compressed_bytes": 435819021,
+    "image_expanded_bytes": 1165157789,
+    "source_tar_expanded_each_bytes": 19036160,
+    "container_memory_limit_bytes": 12884901888,
+    "host_minimum_GiB": 15,
+    "host_minimum_available_GiB": 10,
+    "host_minimum_CPUs": 4,
+    "initial_disk_free_GiB": 10,
+    "runtime_disk_floor_GiB": 3,
+    "CPU_or_workers_throttled": false,
+    "estimated_peak_RAM_GiB": 4,
+    "peak_estimate_basis": "Serial pytest on three affected files with small model/array tests; no model weights; previously239affectedcases in this scope. No measured current peak yet;12GiB cap and liveDocker samples must confirm. This is an estimate, not prior actualRSS.",
+    "estimated_lane_wall_minutes": 20,
+    "wall_basis": "Prior complete three-file scope239cases; current extra main changes mainly documentation/debug behavior; wheels-only150packageinstall233MB, strict4CPUhost. Current timing unmeasured, shared50minharddeadline and47minjob.",
+    "precommit_hooks": "Current pinned six-repository hook configuration differs from prior tested hook config only in versioneer path exclusion. Exact hook graph/runtime fresh acquisition still to be assessed in full execution review; no package count claim for isolated hook venvs.",
+    "precommit_estimated_extra_download_MiB": 200,
+    "precommit_estimated_extra_disk_MiB": 700,
+    "precommit_basis": "Exactly same six pinned hook repositories/dependency definitions as prior successful PyMC Docker hook run; only versioneer exclusion path changed. Fresh isolated hook venv transitive resolution not measured; reserve estimates explicit, no claimed dependency count."
+  },
+  "network": "PublicPyPI/GitHub during preparation; bridge disconnected during pytest/mypy; get_data runs unskipped and may show matched baseline network failure. No provider credentials/calls.",
+  "tests": "All3affectedfiles+all8focusedcases float64/32 baseline/candidate, no maxfail or deselection, exactXMLcasecoverage/failure/skipcomparison; configuredmypy and5fileprecommit bothfloat64 lanes.",
+  "source_version": "Archives are exact public upstream/merged tree; editable build may report0+unknown without history, record actual version plus authoritative hashes. No test claim for nativeMac/Windows or fullrepository/Sphinx.",
+  "files": {
+    "inside.py": "113109f616970bebcbec67f870e2cbf1a495c4d6c751e6b4372735d10be1355c",
+    "workflow.yml": "554ea5a175d5dd663ae7ccfbf7803a6804710a663a07ad310a71869236d9ad9a",
+    "requirements.txt": "e46defcf662221e6c9146d7e4c8b77db812ca4e256cc0af3eb97c35ad3e964c1",
+    "host.py": "cf14340b70acc8156fa5b3a4a4d770889a306e97ac52588ee526c709fbe4f7ea",
+    "candidate.tar.gz": "81ef86a8fad06c993a0cc856d593c60b7ea09cefd4fee01f4910792d3a7279f8",
+    "compare.py": "7e41f7c01e0a34712e1bf0a41151022300ea1c5cdb1fe611c957913200c04fd3",
+    "baseline.tar.gz": "a2a8e915dde9d1c81dde779e3ae8b95d05dc6e7c51479779244a61f3beb2e7fd"
+  },
+  "lane_deadline_seconds": 2700,
+  "comparison_hard_deadline_seconds": 3000,
+  "container_home": "Owned /work/home inside container only; Mac home/settings untouched",
+  "C1_C5": "Exact preapproved completedClaude169751ms; root/runtime guards unchanged except stated thresholds/deadline/error merge/probe"
+}

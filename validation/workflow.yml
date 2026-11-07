@@ -1,0 +1,71 @@
+name: Validate explicit data dtype after upstream merge
+on:
+  push:
+    branches: [validate-data-dtype-8467-merge-20261106]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 47
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [baseline, candidate]
+        floatX: [float64, float32]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Actual creation-time anchor
+        id: anchor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/leninworld/pymc/actions/runs/$GITHUB_RUN_ID > "$RUNNER_TEMP/run.json"
+          python3 - <<'PY'
+          import json,os,datetime
+          from pathlib import Path
+          r=json.loads((Path(os.environ['RUNNER_TEMP'])/'run.json').read_text())
+          assert r['run_attempt']==1 and r['id']==int(os.environ['GITHUB_RUN_ID'])
+          assert r['event']=='push' and r['head_branch']=='validate-data-dtype-8467-merge-20261106'
+          origin=int(datetime.datetime.fromisoformat(r['created_at'].replace('Z','+00:00')).timestamp())
+          with open(os.environ['GITHUB_OUTPUT'],'a')as f:f.write(f'origin={origin}\n')
+          PY
+      - name: Full affected Docker validation
+        env:
+          VARIANT: ${{ matrix.variant }}
+          FLOATX: ${{ matrix.floatX }}
+          PACKET_ORIGIN: ${{ steps.anchor.outputs.origin }}
+        run: python3 validation/host.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proof-${{ matrix.variant }}-${{ matrix.floatX }}
+          path: ${{ runner.temp }}/pymc8467-${{ matrix.variant }}-${{ matrix.floatX }}/evidence/
+          if-no-files-found: error
+          retention-days: 7
+  compare:
+    needs: proof
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: proof-*
+          path: ${{ runner.temp }}/results
+      - name: Compare complete suites and exact new cases
+        run: python3 validation/compare.py "$RUNNER_TEMP/results" "$RUNNER_TEMP/comparison.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: comparison
+          path: ${{ runner.temp }}/comparison.json
+          if-no-files-found: error
+          retention-days: 7
